@@ -65,6 +65,12 @@ Public Class Repository
 
     End Sub
 
+    Sub saveMultipleData(tableName As String, packets As List(Of BaseModel))
+        For Each packet In packets
+            saveData(tableName, packet.toArray().ToArray())
+
+        Next
+    End Sub
 
     Sub updateData(tableName As String, idName As String, id As String, ParamArray var() As String)
         Dim sql As String
@@ -85,5 +91,17 @@ Public Class Repository
 
 
     End Sub
+
+    Function checkDuplicate(tableName As String, idName As String, id As String)
+        Dim sequel As String
+        sequel = "select * from " + tableName + " where " + idName + " = '" + id + "'"
+        CMD = New OleDb.OleDbCommand(sequel, Conn)
+
+        DM = CMD.ExecuteReader()
+        DM.Read()
+        Return DM.HasRows
+
+    End Function
+
 
 End Class
