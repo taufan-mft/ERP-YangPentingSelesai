@@ -9,9 +9,9 @@ Module Connection
 
     Sub koneksiDB()
         Try
-            Conn = New OleDbConnection("provider=microsoft.ace.oledb.12.0; data source = bioskopkita.accdb")
+            Conn = New OleDbConnection("provider=microsoft.ace.oledb.12.0; data source = YangPentingSelesai.accdb")
             Conn.Open()
-            'MsgBox("Mantap pan")
+            MsgBox("DB Connected!")
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
