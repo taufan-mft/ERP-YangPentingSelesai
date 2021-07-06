@@ -13,7 +13,13 @@ Public Class Repository
         Return objRepository
     End Function
 
-
+    Sub nukeTable(tableName As String)
+        Dim sql As String
+        sql = "DELETE FROM " + tableName
+        CMD = New OleDb.OleDbCommand(sql, Conn)
+        DM = CMD.ExecuteReader
+        MsgBox("Data terhapus.")
+    End Sub
     Sub showData(sql As String, DGV As DataGridView)
         DA = New OleDb.OleDbDataAdapter(sql, Conn)
         DS = New DataSet
@@ -72,25 +78,7 @@ Public Class Repository
         Next
     End Sub
 
-    Sub updateData(tableName As String, idName As String, id As String, ParamArray var() As String)
-        Dim sql As String
-        sql = "update " + tableName + " set "
-        For i As Integer = 0 To UBound(var, 1) Step 2
-            If i <> (UBound(var, 1) - 1) Then
-                sql = sql + var(i) + " ='" + var(i + 1) + "', "
 
-            Else
-                sql = sql + var(i) + " ='" + var(i + 1) + "'"
-            End If
-        Next
-        sql = sql + " where " + idName + " = '" + id + "'"
-
-        CMD = New OleDbCommand(sql, Conn)
-        DM = CMD.ExecuteReader
-        MsgBox("Update berhasil")
-
-
-    End Sub
 
     Function checkDuplicate(tableName As String, idName As String, id As String)
         Dim sequel As String
@@ -123,6 +111,74 @@ Public Class Repository
                 'MsgBox(DM.GetString(0))
                 ''Label3.Text = DM.GetString(0)
                 hasil = New Prod(DM.GetString(0), DM.GetString(1), DM.GetValue(2))
+            End While
+        End If
+        Return hasil
+    End Function
+
+    Sub updateData(tableName As String, idName As String, id As String, ParamArray var() As String)
+        Dim sql As String
+        sql = "update " + tableName + " set "
+        For i As Integer = 0 To UBound(var, 1) Step 2
+            If i <> (UBound(var, 1) - 1) Then
+                sql = sql + var(i) + " ='" + var(i + 1) + "', "
+
+            Else
+                sql = sql + var(i) + " ='" + var(i + 1) + "'"
+            End If
+        Next
+        sql = sql + " where " + idName + " = '" + id + "'"
+
+        CMD = New OleDbCommand(sql, Conn)
+        DM = CMD.ExecuteReader
+        MsgBox("Update berhasil")
+
+
+    End Sub
+    Function retrieveUnpaidOrders(fullfilled As Boolean) As List(Of Order)
+        Dim sql As String = "Select * from " + TABLE_ORDER + " where fullfilled = 0"
+        If fullfilled Then
+            sql = "Select * from " + TABLE_ORDER + " where fullfilled = -1"
+        End If
+        CMD = New OleDb.OleDbCommand(sql, Conn)
+        Dim list As New List(Of Order)()
+        DM = CMD.ExecuteReader()
+        If DM.HasRows = True Then
+            While DM.Read
+                Dim order As New Order(DM.GetString(0), DM.GetString(1), DM.GetString(2), DM.GetString(3), DM.GetValue(4), DM.GetValue(5), DM.GetValue(6))
+                list.Add(order)
+            End While
+        End If
+        Return list
+    End Function
+    Function retrieveProducts() As List(Of Prod)
+        Dim sql As String = "Select * from " + TABLE_PRODUK
+        CMD = New OleDb.OleDbCommand(sql, Conn)
+        Dim list As New List(Of Prod)()
+        DM = CMD.ExecuteReader()
+        If DM.HasRows = True Then
+            'MsgBox("Dianis")
+            While DM.Read
+                'MsgBox(DM.GetString(0))
+                ''Label3.Text = DM.GetString(0)
+                Dim prod As New Prod(DM.GetString(0), DM.GetString(1), DM.GetValue(2))
+                list.Add(prod)
+            End While
+        End If
+        Return list
+    End Function
+
+    Function retrieveProductCount(idProduk As String, idOrder As String) As Integer
+        Dim sql As String = "Select jumlah from " + TABLE_ORDER_DETAIL + " WHERE id_produk = '" + idProduk + "' AND id_order = '" + idOrder + "'"
+        CMD = New OleDb.OleDbCommand(sql, Conn)
+        Dim hasil As Integer
+        DM = CMD.ExecuteReader()
+        If DM.HasRows = True Then
+            'MsgBox("Dianis")
+            While DM.Read
+                'MsgBox(DM.GetString(0))
+                ''Label3.Text = DM.GetString(0)
+                hasil = DM.GetValue(0)
             End While
         End If
         Return hasil
