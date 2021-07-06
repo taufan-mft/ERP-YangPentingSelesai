@@ -65,7 +65,7 @@ Public Class Repository
 
     End Sub
 
-    Sub saveMultipleData(tableName As String, packets As List(Of BaseModel))
+    Sub saveMultipleData(tableName As String, packets As IEnumerable(Of BaseModel))
         For Each packet In packets
             saveData(tableName, packet.toArray().ToArray())
 
@@ -102,6 +102,30 @@ Public Class Repository
         Return DM.HasRows
 
     End Function
+    Function checkDuplicateInteger(tableName As String, idName As String, id As String)
+        Dim sequel As String
+        sequel = "select * from " + tableName + " where " + idName + " = " + id + ""
+        CMD = New OleDb.OleDbCommand(sequel, Conn)
 
+        DM = CMD.ExecuteReader()
+        DM.Read()
+        Return DM.HasRows
+
+    End Function
+    Function retrieveProduct(id As String) As Prod
+        Dim sql As String = "Select * from " + TABLE_PRODUK + " where id = '" + id + "'"
+        CMD = New OleDb.OleDbCommand(sql, Conn)
+        Dim hasil As Prod
+        DM = CMD.ExecuteReader()
+        If DM.HasRows = True Then
+            'MsgBox("Dianis")
+            While DM.Read
+                'MsgBox(DM.GetString(0))
+                ''Label3.Text = DM.GetString(0)
+                hasil = New Prod(DM.GetString(0), DM.GetString(1), DM.GetValue(2))
+            End While
+        End If
+        Return hasil
+    End Function
 
 End Class

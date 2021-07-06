@@ -1,4 +1,4 @@
-﻿Public Class Produk
+﻿Public Class ProdukModel
     Dim repository As Repository = Repository.getInstance()
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If Not checkEmpty(TextBox1, TextBox2, TextBox3) Then
