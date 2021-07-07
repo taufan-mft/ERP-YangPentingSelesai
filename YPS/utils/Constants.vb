@@ -7,5 +7,7 @@
     Public TABLE_USER As String = "[user]"
     Public TABLE_GUDANG As String = "[gudang]"
 
+    Public DIRECTION_IN As String = "in"
+    Public DIRECTION_OUT As String = "out"
 
 End Module

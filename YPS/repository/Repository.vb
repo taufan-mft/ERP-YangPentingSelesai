@@ -151,6 +151,21 @@ Public Class Repository
         End If
         Return list
     End Function
+
+    Function retrieveOrderDetail(idOrder As String) As List(Of OrderDetail)
+        Dim sql As String = $"SELECT * FROM {TABLE_ORDER_DETAIL} WHERE id_order='{idOrder}'"
+        CMD = New OleDb.OleDbCommand(sql, Conn)
+        Dim list As New List(Of OrderDetail)()
+        DM = CMD.ExecuteReader()
+        If DM.HasRows = True Then
+            While DM.Read
+                Dim order As New OrderDetail("nama", DM.GetString(1), DM.GetString(2), DM.GetValue(3).ToString, DM.GetValue(4).ToString, 0)
+                list.Add(order)
+            End While
+        End If
+        Return list
+    End Function
+
     Function retrieveProducts() As List(Of Prod)
         Dim sql As String = "Select * from " + TABLE_PRODUK
         CMD = New OleDb.OleDbCommand(sql, Conn)
@@ -182,6 +197,49 @@ Public Class Repository
             End While
         End If
         Return hasil
+    End Function
+
+    Function getLargestId(tableName As String) As Integer
+        Dim sql As String = "SELECT MAX(id) FROM " + tableName
+        CMD = New OleDb.OleDbCommand(sql, Conn)
+        Dim hasil As Integer = 0
+        DM = CMD.ExecuteReader()
+        Try
+            If DM.HasRows = True Then
+                'MsgBox("Dianis")
+                While DM.Read
+                    'MsgBox(DM.GetString(0))
+                    ''Label3.Text = DM.GetString(0)
+                    hasil = DM.GetValue(0)
+                End While
+            End If
+        Catch
+
+        End Try
+
+        Return hasil
+    End Function
+
+    Function getProductWarehouseCount(idProduct As String) As Integer
+        Dim total As Integer = 0
+        Dim sql As String = $"SELECT jumlah FROM {TABLE_GUDANG}"
+        CMD = New OleDb.OleDbCommand(sql, Conn)
+        Dim hasil As Integer = 0
+        DM = CMD.ExecuteReader()
+        Try
+            If DM.HasRows = True Then
+                'MsgBox("Dianis")
+                While DM.Read
+                    'MsgBox(DM.GetString(0))
+                    ''Label3.Text = DM.GetString(0)
+                    hasil = hasil + DM.GetValue(0)
+                End While
+            End If
+        Catch
+
+        End Try
+
+        Return total
     End Function
 
 End Class

@@ -15,6 +15,7 @@
         Me.fullfilled = fullfilled
         Me.paid = paid
         Me.total = total
+        Me.alamat = alamat
     End Sub
 
     Public Overrides Function toArray() As List(Of String)

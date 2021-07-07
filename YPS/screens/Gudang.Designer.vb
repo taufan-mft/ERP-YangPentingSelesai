@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class DaftarSales
+Partial Class Gudang
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -24,67 +24,74 @@ Partial Class DaftarSales
     Private Sub InitializeComponent()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.DataGridView3 = New System.Windows.Forms.DataGridView()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
+        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DataGridView3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DataGridView1
         '
-        Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(15, 38)
-        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 59)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowTemplate.Height = 25
-        Me.DataGridView1.Size = New System.Drawing.Size(824, 265)
+        Me.DataGridView1.Size = New System.Drawing.Size(425, 277)
         Me.DataGridView1.TabIndex = 0
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(15, 16)
+        Me.Label1.Location = New System.Drawing.Point(12, 38)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(129, 18)
+        Me.Label1.Size = New System.Drawing.Size(19, 18)
         Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Unfullfilled Orders"
+        Me.Label1.Text = "In"
         '
-        'Label3
+        'Label2
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(15, 329)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(113, 18)
-        Me.Label3.TabIndex = 5
-        Me.Label3.Text = "Fullfilled Orders"
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(478, 38)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(34, 18)
+        Me.Label2.TabIndex = 2
+        Me.Label2.Text = "Out"
         '
-        'DataGridView3
+        'DataGridView2
         '
-        Me.DataGridView3.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.DataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView3.Location = New System.Drawing.Point(15, 351)
-        Me.DataGridView3.Margin = New System.Windows.Forms.Padding(4)
-        Me.DataGridView3.Name = "DataGridView3"
-        Me.DataGridView3.RowTemplate.Height = 25
-        Me.DataGridView3.Size = New System.Drawing.Size(824, 227)
-        Me.DataGridView3.TabIndex = 4
+        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView2.Location = New System.Drawing.Point(478, 59)
+        Me.DataGridView2.Name = "DataGridView2"
+        Me.DataGridView2.RowTemplate.Height = 25
+        Me.DataGridView2.Size = New System.Drawing.Size(425, 277)
+        Me.DataGridView2.TabIndex = 3
         '
-        'DaftarSales
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(127, 389)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(106, 75)
+        Me.Button1.TabIndex = 4
+        Me.Button1.Text = "Kirim"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Gudang
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ClientSize = New System.Drawing.Size(1002, 718)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.DataGridView3)
+        Me.ClientSize = New System.Drawing.Size(1096, 623)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.DataGridView2)
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.DataGridView1)
         Me.Font = New System.Drawing.Font("Urbanist", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
-        Me.Name = "DaftarSales"
-        Me.Text = "DaftarSales"
+        Me.Name = "Gudang"
+        Me.Text = "Kirim"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DataGridView3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -92,6 +99,7 @@ Partial Class DaftarSales
 
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents Label1 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents DataGridView3 As DataGridView
+    Friend WithEvents Label2 As Label
+    Friend WithEvents DataGridView2 As DataGridView
+    Friend WithEvents Button1 As Button
 End Class

@@ -20,4 +20,12 @@
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         ProduksiProduk.Show()
     End Sub
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Gudang.Show()
+    End Sub
 End Class

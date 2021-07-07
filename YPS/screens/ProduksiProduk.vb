@@ -42,8 +42,11 @@
             Next
             Debug.WriteLine(prod.nama + " " + total.ToString)
             If total > 0 Then
-                Dim needed As New Needed(prod.nama, total)
-                listNeeded.Add(needed)
+                total = total - repository.getProductWarehouseCount(prod.id)
+                If total > 0 Then
+                    Dim needed As New Needed(prod.nama, total, prod.id)
+                    listNeeded.Add(needed)
+                End If
             End If
             'Dim indexOfMyApple = list.FindIndex(Function(apple) myApple.Equals(apple))
         Next
@@ -64,8 +67,10 @@
     End Sub
 
     Private Sub updateFullFilled()
-        For Each order In listUnfullOrder
-            repository.updateData(TABLE_ORDER, "id", order.id, "fullfilled", "-1")
+
+        For Each entry In listNeeded
+            Dim kode As Integer = repository.getLargestId(TABLE_GUDANG) + 1
+            repository.saveData(TABLE_GUDANG, kode, entry.id, entry.jumlah, DIRECTION_IN)
         Next
         calculateNeeds()
     End Sub
