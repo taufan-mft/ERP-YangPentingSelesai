@@ -15,6 +15,7 @@
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         repository.nukeTable(TABLE_ORDER)
         repository.nukeTable(TABLE_ORDER_DETAIL)
+        repository.nukeTable(TABLE_GUDANG)
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click

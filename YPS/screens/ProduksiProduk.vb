@@ -16,7 +16,7 @@
         ListView1.Items.Clear()
         ListView2.Items.Clear()
         ListView3.Items.Clear()
-        listUnfullOrder = repository.retrieveUnpaidOrders(fullfilled:=False)
+        listUnfullOrder = repository.retrieveUncreatedOrders(created:=False)
         listProduk = repository.retrieveProducts()
         Debug.WriteLine(listUnfullOrder.Count)
         For Each pesanan In listUnfullOrder
@@ -24,7 +24,7 @@
                                                  pesanan.tanggal, pesanan.fullfilled, pesanan.paid, pesanan.total}))
         Next
         resizeList(ListView1)
-        listFullOrder = repository.retrieveUnpaidOrders(fullfilled:=True)
+        listFullOrder = repository.retrieveUncreatedOrders(created:=True)
         Debug.WriteLine(listFullOrder.Count)
         For Each pesanan In listFullOrder
             ListView3.Items.Add(New ListViewItem(New String() {pesanan.id, pesanan.nama, pesanan.alamat,
@@ -67,7 +67,9 @@
     End Sub
 
     Private Sub updateFullFilled()
-
+        For Each entry In listUnfullOrder
+            repository.updateData(TABLE_ORDER, "id", entry.id, "created", "-1")
+        Next
         For Each entry In listNeeded
             Dim kode As Integer = repository.getLargestId(TABLE_GUDANG) + 1
             repository.saveData(TABLE_GUDANG, kode, entry.id, entry.jumlah, DIRECTION_IN)

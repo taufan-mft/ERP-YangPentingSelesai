@@ -33,7 +33,7 @@
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        repository.saveData(TABLE_ORDER, TextBox1.Text, TextBox2.Text, TextBox3.Text, TextBox4.Text, "0", "-1", total.ToString)
+        repository.saveData(TABLE_ORDER, TextBox1.Text, TextBox2.Text, TextBox3.Text, TextBox4.Text, "0", "0", total.ToString)
         repository.saveMultipleData(TABLE_ORDER_DETAIL, listPesanan)
     End Sub
 End Class

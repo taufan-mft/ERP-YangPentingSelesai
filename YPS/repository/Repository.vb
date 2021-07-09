@@ -131,7 +131,6 @@ Public Class Repository
 
         CMD = New OleDbCommand(sql, Conn)
         DM = CMD.ExecuteReader
-        MsgBox("Update berhasil")
 
 
     End Sub
@@ -151,7 +150,22 @@ Public Class Repository
         End If
         Return list
     End Function
-
+    Function retrieveUncreatedOrders(created As Boolean) As List(Of Order)
+        Dim sql As String = "Select * from " + TABLE_ORDER + " where created = 0"
+        If created Then
+            sql = "Select * from " + TABLE_ORDER + " where created = -1"
+        End If
+        CMD = New OleDb.OleDbCommand(sql, Conn)
+        Dim list As New List(Of Order)()
+        DM = CMD.ExecuteReader()
+        If DM.HasRows = True Then
+            While DM.Read
+                Dim order As New Order(DM.GetString(0), DM.GetString(1), DM.GetString(2), DM.GetString(3), DM.GetValue(4), DM.GetValue(5), DM.GetValue(6))
+                list.Add(order)
+            End While
+        End If
+        Return list
+    End Function
     Function retrieveOrderDetail(idOrder As String) As List(Of OrderDetail)
         Dim sql As String = $"SELECT * FROM {TABLE_ORDER_DETAIL} WHERE id_order='{idOrder}'"
         CMD = New OleDb.OleDbCommand(sql, Conn)
@@ -222,7 +236,7 @@ Public Class Repository
 
     Function getProductWarehouseCount(idProduct As String) As Integer
         Dim total As Integer = 0
-        Dim sql As String = $"SELECT jumlah FROM {TABLE_GUDANG}"
+        Dim sql As String = $"SELECT jumlah FROM {TABLE_GUDANG} WHERE id_produk='{idProduct}'"
         CMD = New OleDb.OleDbCommand(sql, Conn)
         Dim hasil As Integer = 0
         DM = CMD.ExecuteReader()

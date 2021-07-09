@@ -122,7 +122,7 @@ Partial Class ProduksiProduk
         'ColumnHeader5
         '
         Me.ColumnHeader5.Name = "ColumnHeader5"
-        Me.ColumnHeader5.Text = "Paid"
+        Me.ColumnHeader5.Text = "Created"
         '
         'ColumnHeader6
         '
@@ -189,7 +189,7 @@ Partial Class ProduksiProduk
         'ColumnHeader14
         '
         Me.ColumnHeader14.Name = "ColumnHeader14"
-        Me.ColumnHeader14.Text = "Paid"
+        Me.ColumnHeader14.Text = "Created"
         '
         'ColumnHeader15
         '
