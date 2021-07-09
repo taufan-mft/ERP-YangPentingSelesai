@@ -29,4 +29,8 @@
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         Gudang.Show()
     End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        repository.retrieveOrderDetail("wa")
+    End Sub
 End Class

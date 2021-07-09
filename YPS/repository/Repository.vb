@@ -167,12 +167,15 @@ Public Class Repository
         Return list
     End Function
     Function retrieveOrderDetail(idOrder As String) As List(Of OrderDetail)
-        Dim sql As String = $"SELECT * FROM {TABLE_ORDER_DETAIL} WHERE id_order='{idOrder}'"
+        '  Dim sql As String = $"SELECT * FROM {TABLE_ORDER_DETAIL} WHERE id_order='{idOrder}'"
+        Dim sql As String = $"SELECT * FROM {TABLE_ORDER_DETAIL} WHERE id_order = '{idOrder}'"
         CMD = New OleDb.OleDbCommand(sql, Conn)
         Dim list As New List(Of OrderDetail)()
         DM = CMD.ExecuteReader()
         If DM.HasRows = True Then
             While DM.Read
+                Debug.WriteLine("GUIFENAAA")
+                MsgBox(DM.GetString(2))
                 Dim order As New OrderDetail("nama", DM.GetString(1), DM.GetString(2), DM.GetValue(3).ToString, DM.GetValue(4).ToString, 0)
                 list.Add(order)
             End While

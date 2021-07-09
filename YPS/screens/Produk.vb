@@ -10,7 +10,6 @@
                 While repository.checkDuplicateInteger(TABLE_GUDANG, "id", kode.ToString)
                     kode = CInt(Math.Ceiling(Rnd() * 99)) + CInt(Math.Ceiling(Rnd() * 12))
                 End While
-                repository.saveData(TABLE_GUDANG, kode, idProduk, "0")
                 repository.showDataFromTable(TABLE_PRODUK, DataGridView1)
             Else
                 MsgBox("ID tidak boleh sama.")

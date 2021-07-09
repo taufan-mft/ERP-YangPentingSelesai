@@ -46,8 +46,9 @@
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         For Each entry In listUnfullOrder
             Dim listProduct As List(Of OrderDetail) = repository.retrieveOrderDetail(entry.id)
-            Dim kode As Integer = repository.getLargestId(TABLE_GUDANG) + 1
+
             For Each order In listProduct
+                Dim kode As Integer = repository.getLargestId(TABLE_GUDANG) + 1
                 repository.saveData(TABLE_GUDANG, kode, order.id_produk, order.jumlah, DIRECTION_OUT)
             Next
             repository.updateData(TABLE_ORDER, "id", entry.id, "fullfilled", "-1")
