@@ -27,6 +27,7 @@ Public Class Repository
 
         DGV.DataSource = DS.Tables(0)
         DGV.ReadOnly = True
+
     End Sub
 
     Sub showDataFromTable(table As String, dgv As DataGridView)
@@ -169,15 +170,32 @@ Public Class Repository
     Function retrieveOrderDetail(idOrder As String) As List(Of OrderDetail)
         '  Dim sql As String = $"SELECT * FROM {TABLE_ORDER_DETAIL} WHERE id_order='{idOrder}'"
         Dim sql As String = $"SELECT * FROM {TABLE_ORDER_DETAIL} WHERE id_order = '{idOrder}'"
-        CMD = New OleDb.OleDbCommand(sql, Conn)
+        Debug.WriteLine(sql)
+
         Dim list As New List(Of OrderDetail)()
+        CMD = New OleDb.OleDbCommand(sql, Conn)
         DM = CMD.ExecuteReader()
         If DM.HasRows = True Then
             While DM.Read
                 Debug.WriteLine("GUIFENAAA")
-                MsgBox(DM.GetString(2))
+
                 Dim order As New OrderDetail("nama", DM.GetString(1), DM.GetString(2), DM.GetValue(3).ToString, DM.GetValue(4).ToString, 0)
                 list.Add(order)
+            End While
+        End If
+        Return list
+    End Function
+
+    Function debugQuery(sql As String) As List(Of OrderDetail)
+        Dim list As New List(Of OrderDetail)()
+        Dim stringku As New List(Of String)()
+        CMD = New OleDb.OleDbCommand(sql, Conn)
+        Dim DM2 As OleDbDataReader
+        DM2 = CMD.ExecuteReader()
+        If DM2.HasRows = True Then
+            While DM2.Read
+                Dim kode As Integer = getLargestId(TABLE_GUDANG) + 1
+                saveData(TABLE_GUDANG, kode, DM2.GetString(2), DM2.GetValue(3), DIRECTION_OUT)
             End While
         End If
         Return list
